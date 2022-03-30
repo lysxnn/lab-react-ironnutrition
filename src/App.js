@@ -12,15 +12,27 @@ import foods from './foods.json';
 function App() {
   const [allFoods, setAllFoods] = useState(foods);
   const [filter, setFilter] = useState('');
-
+  const [editMode, setEditMode] = useState(false);
   const handleFilter = event => {
     setFilter(event.target.value);
   };
 
+  const toggleForm = () => {
+    setEditMode(!editMode);
+  };
+// const showForm = () => {
+// document.getElementByClassName('foodForm').style.display = 'block';
+// }
+
   return (
     <div>
-      <PageHeader>Add Food Entry</PageHeader>
-      <AddFoodForm setAllFoods={setAllFoods} />
+      <Button onClick={toggleForm}>
+        {editMode ? 'Hide Form' : 'Add New Food'}
+      </Button>
+      <div className="foodForm" style={{display: editMode ? "block" : "none"}}>
+        <PageHeader>Add Food Entry</PageHeader>
+        <AddFoodForm setAllFoods={setAllFoods} />
+      </div>
       <label>
         Search: <Input value={filter} onChange={handleFilter} />
       </label>

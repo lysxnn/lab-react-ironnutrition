@@ -26,7 +26,7 @@ export function Foodbox({ food, setAllFoods }) {
         <p>Calories: {food.calories}</p>
         <p>Servings: {food.servings}</p>
         <p>
-          <b>Total Calories: {computesTotal(food.calories, food.servings)}</b>
+          <b>Total Calories: {computesTotal(food.calories, food.servings)} </b>
           kcal
         </p>
         <Button type="primary" onClick={() => deleteFood(food)}>
