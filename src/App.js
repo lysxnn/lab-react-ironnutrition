@@ -29,7 +29,9 @@ function App() {
       <Row style={{ width: '100%', justifyContent: 'center' }}>
         {filter === ''
           ? allFoods.map(food => {
-              return <Foodbox key={nanoid()} food={food} />;
+              return (
+                <Foodbox setAllFoods={setAllFoods} key={nanoid()} food={food} />
+              );
             })
           : allFoods
               .filter(food => {
@@ -37,7 +39,13 @@ function App() {
                 return food.name.toLowerCase().includes(lowerFilter);
               })
               .map(food => {
-                return <Foodbox key={nanoid()} food={food} />;
+                return (
+                  <Foodbox
+                    setAllFoods={setAllFoods}
+                    key={nanoid()}
+                    food={food}
+                  />
+                );
               })}
 
         {/* {allFoods.map(food => {
