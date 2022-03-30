@@ -11,16 +11,38 @@ import foods from './foods.json';
 
 function App() {
   const [allFoods, setAllFoods] = useState(foods);
+  const [filter, setFilter] = useState('');
+
+  const handleFilter = event => {
+    setFilter(event.target.value);
+  };
 
   return (
     <div>
-    <PageHeader>Add Food Entry</PageHeader>
-    <AddFoodForm setAllFoods={setAllFoods} />
+      <PageHeader>Add Food Entry</PageHeader>
+      <AddFoodForm setAllFoods={setAllFoods} />
+      <label>
+        Search: <Input value={filter} onChange={handleFilter} />
+      </label>
+
       <PageHeader>Food List</PageHeader>
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-        {allFoods.map(food => {
+        {filter === ''
+          ? allFoods.map(food => {
+              return <Foodbox key={nanoid()} food={food} />;
+            })
+          : allFoods
+              .filter(food => {
+                const lowerFilter = filter.toLowerCase();
+                return food.name.toLowerCase().includes(lowerFilter);
+              })
+              .map(food => {
+                return <Foodbox key={nanoid()} food={food} />;
+              })}
+
+        {/* {allFoods.map(food => {
           return <Foodbox key={nanoid()} food={food} />;
-        })}
+        })} */}
       </Row>
     </div>
   );
