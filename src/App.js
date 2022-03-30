@@ -3,10 +3,9 @@ import { useState } from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
 import { nanoid } from 'nanoid';
-import { Card, Row, Col, Divider, Input, Button, PageHeader } from 'antd';
+import { Row, Divider, Input, Button } from 'antd';
 import { Foodbox } from './components/Foodbox';
 import { AddFoodForm } from './components/AddFoodForm';
-
 import foods from './foods.json';
 
 function App() {
@@ -20,26 +19,39 @@ function App() {
   const toggleForm = () => {
     setEditMode(!editMode);
   };
-// const showForm = () => {
-// document.getElementByClassName('foodForm').style.display = 'block';
-// }
+
+  const feedbackMessage = () => {
+    return (
+      <div>
+        <span>🚫</span> Oops! There is no more content to show.
+      </div>
+    );
+  };
+
+  const isEmpty = allFoods.length === 0;
 
   return (
-    <div>
-      <Button onClick={toggleForm}>
+    <div className="App">
+      <Button type="primary" onClick={toggleForm}>
         {editMode ? 'Hide Form' : 'Add New Food'}
       </Button>
-      <div className="foodForm" style={{display: editMode ? "block" : "none"}}>
-        <PageHeader>Add Food Entry</PageHeader>
+      <div
+        className="foodForm"
+        style={{ display: editMode ? 'block' : 'none' }}
+      >
+        <Divider>Add Food Entry</Divider>
         <AddFoodForm setAllFoods={setAllFoods} />
       </div>
+      <Divider>Search</Divider>
       <label>
         Search: <Input value={filter} onChange={handleFilter} />
       </label>
 
-      <PageHeader>Food List</PageHeader>
+      <Divider>Food List</Divider>
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-        {filter === ''
+        {isEmpty
+          ? feedbackMessage()
+          : filter === ''
           ? allFoods.map(food => {
               return (
                 <Foodbox setAllFoods={setAllFoods} key={nanoid()} food={food} />

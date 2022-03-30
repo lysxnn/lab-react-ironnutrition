@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Divider, Input, Button, PageHeader } from 'antd';
+import { Card, Col, Button } from 'antd';
 
 const computesTotal = (calories, servings) => {
   return calories * servings;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Card, Row, Col, Divider, Input, Button, PageHeader } from 'antd';
+import { Input, Button } from 'antd';
 
 export function AddFoodForm(props) {
   const [state, setState] = useState({
@@ -68,7 +68,7 @@ export function AddFoodForm(props) {
           onChange={changeHandler}
         />
       </label>
-      <Button onClick={addFood}>Create</Button>
+      <Button type="primary" onClick={addFood}>Create</Button>
     </form>
   );
 }
