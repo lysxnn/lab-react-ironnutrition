@@ -12,16 +12,12 @@ function App() {
 
   return (
     <div>
-    <PageHeader>Food List</PageHeader>
-      <Foodbox food={foods[15]}  />
-      {allFoods.map((food) => {
-        return (
-          <div>
-            <p> {food.name}</p>
-            <img src={food.image} alt={food.name} width={100} />
-          </div>
-        );
-      })}
+      <PageHeader>Food List</PageHeader>
+      <Row style={{ width: '100%', justifyContent: 'center' }}>
+        {allFoods.map(food => {
+          return <Foodbox food={food} />;
+        })}
+      </Row>
     </div>
   );
 }
