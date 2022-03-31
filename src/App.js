@@ -10,13 +10,15 @@ import foods from './foods.json';
 
 function App() {
   const [allFoods, setAllFoods] = useState(foods);
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState(''); // has to live here because it's lifting the state up
   const [editMode, setEditMode] = useState(false);
+
   const handleFilter = event => {
     setFilter(event.target.value);
   };
 
   const toggleForm = () => {
+    // we don't care about the default state here
     setEditMode(!editMode);
   };
 
@@ -60,7 +62,11 @@ function App() {
           : allFoods
               .filter(food => {
                 const lowerFilter = filter.toLowerCase();
-                return food.name.toLowerCase().includes(lowerFilter);
+                return food.name
+                  .toLowerCase()
+                  .trim() // removes all the white space in the searchbar
+                  .includes(lowerFilter)
+                  .trim();
               })
               .map(food => {
                 return (

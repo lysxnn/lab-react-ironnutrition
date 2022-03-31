@@ -4,9 +4,10 @@ import { Input, Button } from 'antd';
 
 export function AddFoodForm(props) {
   const [state, setState] = useState({
+    // this is a default state so they get default values like empty strings etc.
     name: '',
     image: '',
-    calories: Number,
+    calories: Number, // you can set it to 'null' so you don't have the dropdown
     servings: Number
   });
 
@@ -20,11 +21,12 @@ export function AddFoodForm(props) {
   const handleSubmit = event => {
     event.preventDefault();
     addFood()
+    
   };
 
   const addFood = () => {
-    props.setAllFoods(oldFoods => { //setAllFoods is lifting the state up
-      return [state, ...oldFoods];
+    props.setAllFoods(oldFoods => { // setAllFoods is lifting the state up
+      return [state, ...oldFoods];  // with the spread-operator we're creating a shallow copy 
     });
   };
 
